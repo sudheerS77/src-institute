@@ -10,7 +10,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 
-const StudentsLogin = () => {
+const Login = () => {
     const [values, setValues] = React.useState({
         name: "",
         institution: "",
@@ -23,6 +23,7 @@ const StudentsLogin = () => {
 
       });
 
+      console.log(values);
       const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
       };
@@ -41,20 +42,19 @@ const StudentsLogin = () => {
     const registrationType = [
         { value : "" }
     ]
-    const [currency, setCurrency] = React.useState('EUR');
+    //const [currency, setCurrency] = React.useState('EUR');
 
-  const handleChanges = (event) => {
-    setCurrency(event.target.value);
-  };
+  // const handleChanges = (event) => {
+  //   setCurrency(event.target.value);
+  // };
 
 
   return (
     <>
         <div className="">
-            <div className="flex flex-col items-center justify-center gap-4">
-                <h2>Login</h2>
-                <div>
-                    <div className="w-72 flex flex-col items-end justify-center gap-5 bg-gray-300">
+                <div className="flex flex-col items-center justify-center gap-4 mx-2">
+                    <div className="w-80 md:w-96 px-2 md:px-12 py-5 pb-10 flex flex-col items-end justify-center gap-5 bg-gray-50 border rounded-md shadow-xl">
+                    <h2 className="mx-40 text-2xl font-bold text-gray-500">Login</h2>
                         <TextField
                             required
                             id="outlined-required"
@@ -62,7 +62,7 @@ const StudentsLogin = () => {
                             fullWidth
                         />
                         <span className="mx-2 w-full">
-                            <FormControl sx={{ m: 1, width: '33.5ch' }} variant="outlined">
+                            <FormControl sx={{ m: 1 }} variant="outlined" fullWidth>
                                 <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                                 <OutlinedInput
                                     id="outlined-adornment-password"
@@ -86,16 +86,15 @@ const StudentsLogin = () => {
                             </FormControl>
                         </span>
                         <Button variant="outlined" fullWidth className="h-14" >Login</Button>
-
+                        <div className="border-t border-gray-200 w-72 py-2">
+                          <a href="#" className="text-md font-gray-400 font-light">forgot Password ? <span className="text-blue-900 font-semibold">click here</span> </a>
+                        </div>
                     </div>
-                    <div className="border-t border-gray-200 w-72 py-2">
-                        <a href="#">forgot Password ?</a>
-                    </div>
+                   
                 </div>
-            </div>
         </div>
     </>
   )
 }
 
-export default StudentsLogin
+export default Login;

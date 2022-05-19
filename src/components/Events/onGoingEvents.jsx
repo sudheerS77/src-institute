@@ -3,7 +3,7 @@ import React from 'react'
 const OnGoingEvents = () => {
   return (
     <>
-      <h1 className="text-xl font-bold">OnGoing Events</h1>
+      <h1 className="text-3xl font-bold">OnGoing Events</h1>
       <div className="flex flex-col items-center justify-center gap-10">      
         <div className="flex flex-col md:flex-row items-center justify-around gap-5 lg:gap-0 px-5 lg:px-0 bg-gray-100 md:w-3/4 py-5 rounded-md shadow-2xl">
           <div className="w-full md:w-64 h-52 lg:w-80 lg:h-60">

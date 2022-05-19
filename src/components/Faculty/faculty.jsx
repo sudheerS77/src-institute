@@ -59,7 +59,7 @@ const Faculty = () => {
     ]);
     const settings = {
         dots: false,
-        infinite: false,
+        infinite: true,
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
@@ -85,8 +85,8 @@ const Faculty = () => {
               slidesToShow: 1,
               slidesToScroll: 1,
               initialSlide: 1,
-              //nextArrow: <NextArrows />,
-              //prevArrow: <PrevArrows />, 
+              nextArrow: <NextArrows />,
+              prevArrow: <PrevArrows />, 
             }
           },
           {
@@ -94,8 +94,8 @@ const Faculty = () => {
             settings: {            
               slidesToShow: 1,
               slidesToScroll: 1,
-              nextArrow: false,
-              prevArrow: false,
+              nextArrow: <NextArrows />,
+              prevArrow: <PrevArrows />, 
             }
           }
         ]
@@ -104,8 +104,8 @@ const Faculty = () => {
     <>
         <div className="py-10">
           <div className="flex flex-row items-center justify-between mx-8 md:mx-40 pb-8">
-            <h1 className="text-2xl font-semibold text-blue-800 font-light">Faculty</h1>
-            <a href="./allfaculty"><p className="text-xs md:text-sm font-light">see more</p></a>
+            <h1 className="text-2xl md:font-3xl font-semibold md:font-bold pl-3">Faculty</h1>
+            <a href="./allfaculty"><p className="text-xs md:text-sm font-light"></p></a>
           </div>
           <div className="w-80 md:w-auto lg:mx-40">
               <Slider {...settings}>

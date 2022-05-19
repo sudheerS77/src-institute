@@ -25,12 +25,18 @@ const VisitingFaculty = () => {
             name: "DR.ANAND RAMANATHAN",
             deg: "",
             position: "VISITING PROFESSOR.",
-        },        
+        }, 
+        {
+          image: "https://oralpath.sriher.com/resources/pcadmin/img/faculties/1601391429_Dr.Ranganathan.JPG",
+          name: "DR.K. RANGANATHAN",
+          deg: "",
+          position: "ADJUNCT PROFESSOR",
+      },       
     ]);
 
     const settings = {
         dots: false,
-        infinite: false,
+        infinite: true,
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
@@ -76,8 +82,8 @@ const VisitingFaculty = () => {
     <>
         <div className="py-10">
           <div className="flex flex-row items-center justify-between mx-10 md:mx-40 pb-8">
-            <h1 className="text-2xl font-semibold text-blue-800 font-light">VisitingFaculty</h1>
-            <Link to="./allfaculty"><p className="text-xs md:text-sm font-light">see more</p></Link>
+            <h1 className="text-3xl font-bold">Visiting Faculty</h1>
+            <Link to="./allfaculty"><p className="text-xs md:text-sm font-light"></p></Link>
           </div>
           <div className="w-80 md:w-auto lg:mx-40">
               <Slider {...settings}>

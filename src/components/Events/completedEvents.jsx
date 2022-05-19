@@ -3,7 +3,7 @@ import React from 'react'
 const CompletedEvents = () => {
   return (
     <>
-      <h1 className="text-xl font-bold">Completed Events</h1>
+      <h1 className="text-3xl font-bold">Completed Events</h1>
         <div className="flex flex-wrap mx-6 md:mx-32 items-center justify-between gap-8">
           <div className="w-full md:w-72 border border-gray-200 py-2 flex flex-col items-center justify-center gap-2 shadow-2xl bg-grey-500">
               <div className="w-full md:w-64 h-80">

@@ -14,7 +14,7 @@ const Achievements = () => {
   return (
     <>  
         <NavBar />
-        <div className="bg-purple-100">
+        <div className="bg-purple-100relative top-20">
             <div className='lg:w-full h-32 lg:-mb-1.5'></div>
             {/* <div className="md:ml-10 w-2/5">
                 <Tag eventName={"Achievements"} />

@@ -6,7 +6,7 @@ const PG = () => {
     <>
         <div className="flex flex-col mb-14">
             <div className="flex flex-row items-center justify-between mx-10 md:mx-40 pb-10 mt-10">
-                <h1 className="text-2xl md:shadow-sm font-semibold text-blue-800">PG</h1>
+                <h1 className="text-2xl md:font-3xl font-semibold md:font-bold pl-3">PG</h1>
                 <Link to="./allfaculty"><p className="text-xs md:text-sm font-light">see more</p></Link>
             </div>
             <div className="flex flex-col items-center justify-center gap-8 md:gap-20">

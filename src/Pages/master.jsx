@@ -7,8 +7,9 @@ import GalleryPage from './Gallery';
 import Home from './Home';
 import Achievements from './Achievements';
 import Projects from './Projects';
-import Login from './Login';
+import LoginPage from './Login.page';
 import RegisterPage from './Register.page';
+import AdminHomePage from './Admin/admin.home';
 
 const Master = () => {
   let { type }= useParams();
@@ -20,9 +21,8 @@ const Master = () => {
       { type === "gallery" && <GalleryPage /> }
       { type === "achivements" && <Achievements /> }
       { type === "projects" && <Projects /> }
-      { type === "login" && <Login /> }
+      { type === "login" && <LoginPage /> }
       { type === "register" && <RegisterPage /> }
-
     </div>
   );
 };

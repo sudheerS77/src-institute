@@ -49,8 +49,9 @@ const Register = () => {
 
 
   return (
-    <div>
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-5 bg-gray-50 border rounded-md py-10 mx-4 md:mx-20 lg:mx-52 shadow-xl">
+    <div className="bg-gray-50 border rounded-md py-10 mx-4 md:mx-20 lg:mx-52 shadow-xl">
+        <h2 className="mx-40 text-2xl font-bold text-gray-500 mb-4">Register</h2>
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-5">
             <div className="flex flex-col items-center gap-5 w-72">                
                 <TextField
                     required
@@ -78,7 +79,7 @@ const Register = () => {
                 />
                 
             </div>
-            <div className="flex flex-col items-center gap-3 w-72">                
+            <div className="flex flex-col items-center gap-5 w-72">                
                 <TextField
                     required
                     id="outlined-required"
@@ -99,7 +100,7 @@ const Register = () => {
                     <MenuItem key={"Faculty"} value={"Faculty"}>Faculty</MenuItem>
                     <MenuItem key={"International"} value={"International"}>International</MenuItem>     
                 </TextField>
-                <FormControl sx={{ m: 1, width: '33ch' }} variant="outlined">
+                <FormControl variant="outlined" fullWidth>
                     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
@@ -121,7 +122,7 @@ const Register = () => {
                         label="Password"
                     />
                 </FormControl>
-                <FormControl sx={{ m: 1, width: '33ch' }} variant="outlined">
+                <FormControl fullWidth variant="outlined">
                     <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
@@ -144,12 +145,18 @@ const Register = () => {
                     />
                 </FormControl>                                
             </div>
-            <div className="flex flex-col items-center gap-6 w-72">                                
+            <div className="flex flex-col items-center gap-6 w-72">  
+                <TextField
+                    required
+                    id="outlined-required"
+                    label="Your name"  
+                    fullWidth
+                />                              
                 <TextField
                     id="outlined-multiline-static"
                     label="address"
                     multiline
-                    rows={7}
+                    rows={4}
                     fullWidth
                     //defaultValue="address"
                 />

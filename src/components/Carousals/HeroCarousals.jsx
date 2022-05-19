@@ -4,7 +4,7 @@ import Slider from "react-slick";
 
 //Components
 import { NextArrows, PrevArrows } from '../CarousalArrows';
-import ImageCarousal from './ImageCarousal';
+import { LGImageCarousal, SMImageCarousal } from './ImageCarousal';
 
 const HeroCarousals = () => {
 
@@ -22,25 +22,26 @@ const HeroCarousals = () => {
       ]);
     const settings = {
         dots: false,
-        infinite: false,
+        infinite: true,
         speed: 500,
-        slidesToShow: 2,
+        slidesToShow: 1,
         slidesToScroll: 1,
         initialSlide: 0,  
         autoplay: true,
         speed: 400,
         autoplaySpeed: 2000,
-        cssEase: "linear",
-        nextArrow: <NextArrows />,
-        prevArrow: <PrevArrows />,      
+        cssEase: "linear",             
         responsive: [
           {
             breakpoint: 1024,
             settings: {
-              slidesToShow: 2,
+              slidesToShow: 1,
               slidesToScroll: 1,
               infinite: true,
-              dots: true              
+              dots: true,
+              arrows: true,
+              nextArrow: <NextArrows />,
+              prevArrow: <PrevArrows />,          
             }
           },
           {
@@ -48,7 +49,8 @@ const HeroCarousals = () => {
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
-              initialSlide: 1
+              initialSlide: 1,
+              arrows: false
             }
           },
           {
@@ -56,8 +58,8 @@ const HeroCarousals = () => {
             settings: {            
               slidesToShow: 1,
               slidesToScroll: 1,
-              nextArrow: false,
-                prevArrow: false,
+              arrows: false
+              
             }
           }
         ]
@@ -71,18 +73,18 @@ const HeroCarousals = () => {
             {
                 heroBanners.map((image) => (
                    <div className="md:px-0.5">
-                        <ImageCarousal image={image} /> 
+                        <LGImageCarousal image={image} /> 
                    </div>               
                 ))
             }
             </Slider>
         </div>
-        <div className='w-80 ml-4 -mt-14 md:hidden'>
+        <div className='h-full md:hidden'>
           <Slider {...settings} >
               {
                   heroBanners.map((image) => (
-                    <div className="md:px-0.5">
-                          <ImageCarousal image={image} /> 
+                    <div>
+                          <SMImageCarousal image={image} /> 
                     </div>               
                   ))
               }

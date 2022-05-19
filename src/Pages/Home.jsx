@@ -12,18 +12,19 @@ import NavBar from '../components/Navbar/NavBar';
 
 const Home = () => {
   return (
-    <div>        
+    <>        
       <NavBar />
-      <div className="bg-indigo-50">
-        <div className='w-full h-32 -mb-1.5'></div>
-        <HeroCarousals />
+      <div className="bg-indigo-50 relative top-20">        
+        <div className="border-red-900">
+          <HeroCarousals />
+        </div>
         <AboutDep />
         <Faculty />
         <VisitingFaculty />
         <PG />
       </div>
       <Footer />
-    </div>
+    </>
   )
 }
 
