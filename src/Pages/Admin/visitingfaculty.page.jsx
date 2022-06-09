@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { IoMdAdd } from 'react-icons/io';
 import { FaUserTie } from 'react-icons/fa';
@@ -9,21 +10,36 @@ import AdminNavBar from '../../components/AdminComponents/adminNavBar';
 import Card from '../../components/AdminComponents/card';
 import VisitingFacultyTable from '../../components/AdminComponents/VisitingFacultyFeatures/visitingfacultyTable';
 import AddVisitingFaculty from '../../components/AdminComponents/VisitingFacultyFeatures/addVisitingFaculty';
+import UpdateVisitingFaculty from "../../components/AdminComponents/VisitingFacultyFeatures/updateVisitingFaculty";
 
+//Redux actions
+import { getVisitingFaculty } from "../../Redux/Reducer/VisitingFaculty/visitingFaculty.action";
+import { getAllUsers } from '../../Redux/Reducer/User/user.action';
 const VisitingFacultyPage = (props) => {
+    const [facultyData, setFacultyData] = useState([]);  
     const cardData = [
         {
             name: "VISITING FACULTY",
-            count: 3,
+            count: facultyData?.length,
             link: "Visiting Faculty",
             linkUrl: "/admin/visiting-faculty",
             icon: <FaUserTie />,
         },
       ]
+    const reduxState = useSelector((globalStore) => globalStore.visitingFaculty)
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(getVisitingFaculty());
+    }, [])
+    
+  useEffect(() => {
+    reduxState?.faculty && setFacultyData(reduxState?.faculty.data);
+  }, [reduxState?.faculty]);
+  
   return (
     <>
         <div className="flex flex-row w-full">
-            <div className="w-1/4">
+            <div className="w-1/5">
               <SideBar />
             </div>
             <div className="w-full flex flex-col gap-5">
@@ -45,6 +61,7 @@ const VisitingFacultyPage = (props) => {
                 <div className='mx-10'>
                   { props.urltype === "visitingfaculty" && <VisitingFacultyTable /> }
                   { props.urltype === "addvisitingfaculty" && <AddVisitingFaculty /> }
+                  { props.urltype === "id" && <UpdateVisitingFaculty /> }
                 </div>
               </div>
             </div>

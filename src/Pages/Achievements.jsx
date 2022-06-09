@@ -1,30 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from "react-redux";
+
 
 //Components
 import NavBar from '../components/Navbar/NavBar'
-import Tag from '../components/Tag';
-import Status from '../components/Achievemts/status';
 import UGStudents from '../components/Achievemts/ugStudents';
-import PG from '../components/PG/pg';
+import PG from '../components/Achievemts/pg';
 import FacultyAch from '../components/Achievemts/facultyAch';
 import Footer from '../components/footer';
 
+//Redux actions
+import { getAchievement } from "../Redux/Reducer/Achivements/achievements.action";
 
 const Achievements = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAchievement());
+  }, []);
+
   return (
     <>  
         <NavBar />
-        <div className="bg-purple-100relative top-20">
-            <div className='lg:w-full h-32 lg:-mb-1.5'></div>
-            {/* <div className="md:ml-10 w-2/5">
-                <Tag eventName={"Achievements"} />
-            </div> */}
-            <Status />
-            <UGStudents />
-            <PG />
-            <FacultyAch />
-            <Footer />
+        <div className="bg-purple-100relative top-20 py-10">            
+            <div className="mt-10 md:mt-24">
+              <UGStudents />
+              <PG />
+              <FacultyAch />
+            </div>
         </div>  
+        <Footer />
     </>
   )
 }

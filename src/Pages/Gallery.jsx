@@ -1,113 +1,39 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-
-// import DztImageGalleryComponent from "reactjs-image-gallery";
-
+//Components
 import NavBar from '../components/Navbar/NavBar'
 import GalleryComponent from "../components/Gallery/gallery.Component";
 import Footer from "../components/footer";
 
+//Redux actions
+import { getPhotos } from "../Redux/Reducer/Gallery/gallery.action";
+
 const GalleryPage = () => {
+    const [galleryImages, setGalleryImages] = useState([]);
 
-    const galleryImages = [
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/1057987441_WhatsApp%20Image%202021-02-25%20at%204.53.58%20PM.jpeg",
-      width: "2500",
-      height: "2500",
-
-    },	
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/1103513440_WhatsApp%20Image%202021-02-25%20at%202.07.11%20PM.jpeg",
-      width: 1600,
-      height: 1600,
-    },
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/617910817_WhatsApp%20Image%202021-02-25%20at%202.04.04%20PM.jpeg",
-      width: 1600,
-      height: 2000,
-    },
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/400389095_WhatsApp%20Image%202021-02-25%20at%201.55.58%20PM%20(1)%20-%20Copy.jpeg",
-      width: 1600,
-      height: 2000,
-    },
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/1057987441_WhatsApp%20Image%202021-02-25%20at%204.53.58%20PM.jpeg",
-      width: "2500",
-      height: "2500",
-
-    },	
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/1103513440_WhatsApp%20Image%202021-02-25%20at%202.07.11%20PM.jpeg",
-      width: 1600,
-      height: 1600,
-    },
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/617910817_WhatsApp%20Image%202021-02-25%20at%202.04.04%20PM.jpeg",
-      width: 1600,
-      height: 2000,
-    },
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/400389095_WhatsApp%20Image%202021-02-25%20at%201.55.58%20PM%20(1)%20-%20Copy.jpeg",
-      width: 1600,
-      height: 2000,
-    },
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/1057987441_WhatsApp%20Image%202021-02-25%20at%204.53.58%20PM.jpeg",
-      width: "2500",
-      height: "2500",
-
-    },	
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/1103513440_WhatsApp%20Image%202021-02-25%20at%202.07.11%20PM.jpeg",
-      width: 1600,
-      height: 1600,
-    },
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/617910817_WhatsApp%20Image%202021-02-25%20at%202.04.04%20PM.jpeg",
-      width: 1600,
-      height: 2000,
-    },
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/400389095_WhatsApp%20Image%202021-02-25%20at%201.55.58%20PM%20(1)%20-%20Copy.jpeg",
-      width: 1600,
-      height: 2000,
-    },
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/1057987441_WhatsApp%20Image%202021-02-25%20at%204.53.58%20PM.jpeg",
-      width: "2500",
-      height: "2500",
-
-    },	
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/1103513440_WhatsApp%20Image%202021-02-25%20at%202.07.11%20PM.jpeg",
-      width: 1600,
-      height: 1600,
-    },
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/617910817_WhatsApp%20Image%202021-02-25%20at%202.04.04%20PM.jpeg",
-      width: 1600,
-      height: 2000,
-    },
-    {
-      image: "https://oralpath.sriher.com//resources/pcadmin/img/gallery/400389095_WhatsApp%20Image%202021-02-25%20at%201.55.58%20PM%20(1)%20-%20Copy.jpeg",
-      width: 1600,
-      height: 2000,
-    },
+    const dispatch = useDispatch();
     
-    ]
+    useEffect(() => {
+      dispatch(getPhotos());      
+    }, [])
+    const reduxState = useSelector((globalStore) => globalStore.gallery);
+    
+    useEffect(() => {
+      reduxState?.photos && setGalleryImages(reduxState.photos.photos);
+    }, [reduxState.photos])
+  
 
   return (
     <>
         <NavBar />
-        <div className="bg-pink-50">
-          <div className='lg:w-full h-32 lg:-mb-1.5'></div> 
-          <GalleryComponent name={"2ND NATIONAL ORAL PATHOLIDT DAY"} galleryImages={galleryImages} /> 
-          <GalleryComponent name={"MICROSCOPE"} galleryImages={galleryImages} /> 
-          
+        <div className="py-10">
+          <div className='lg:w-full mt-14 lg:-mb-1.5'></div> 
+            <div className="md:mt-24">
+              <GalleryComponent galleryImages={galleryImages} /> 
+            </div>          
             {/* <DztImageGalleryComponent images={data } imageBackgroundColor={"white"} className="bg-white"/> */}
         </div>
-        <Footer />
     </>
   )
 }

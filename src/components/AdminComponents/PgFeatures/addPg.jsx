@@ -1,31 +1,38 @@
 import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 
+//Redux actions
+import { addPg } from "../../../Redux/Reducer/Pg/pg.action";
+
+
 const AddPG = () => {
-    const status = [
+   
+    const [pgData, setPgData] = useState(
         {
-          value: 'Active',
-          label: 'Active',
-        },
-        {
-          value: 'Inactive',
-          label: 'InActive',
-        },        
-      ];
-    const [statusValue, setStatusValue] = useState();
-    const [values, setValues] = useState(
-        {
-            name:"demo",
-            url: "",
-            degree: "",
-            year: "",
+            name: "",
+            deg: "",
+            description: "",
+            image: "",
             status: "",
         }
     );
-    const handleChange = (event) => {
-        setStatusValue(event.target.value);
+    const dispatch = useDispatch();
+    const submit = () => {
+        dispatch(
+            addPg({
+            ...pgData,
+          })
+        );
+        setPgData({
+            name: "",
+            deg: "",
+            description: "",
+            image: "",
+            status: "",
+        });
     };
   return (
     <>
@@ -35,54 +42,57 @@ const AddPG = () => {
                     required
                     id="outlined-required"
                     label="student name"
-                    value={values.name}
+                    onChange={(e) => setPgData((prev) => ({...prev, name: e.target.value}))}                    
                 />
                 <TextField
                     required
                     id="outlined-required"
                     label="Image url"
                     fullWidth
+                    onChange={(e) => setPgData((prev) => ({...prev, image: e.target.value}))}                    
                 />
                  <TextField
                     required
                     id="outlined-required"
-                    label="Image url"
+                    label="Description"
                     fullWidth
+                    onChange={(e) => setPgData((prev) => ({...prev, description: e.target.value}))}                    
                 />
                 <TextField
                     required
                     id="outlined-required"
                     label="Degree"
+                    onChange={(e) => setPgData((prev) => ({...prev, deg: e.target.value}))}                
                 />
                 <TextField
                     required
                     id="outlined-required"
                     label="Year"
+                    onChange={(e) => setPgData((prev) => ({...prev, year: e.target.value}))}                
                 />
                 <TextField
                     id="outlined-required"
                     select
                     label="Select"
-                    value={statusValue}
-                    onChange={handleChange}
+                    onChange={(e) => setPgData((prev) => ({...prev, status: e.target.value}))}                    
+                    value={""}
                     helperText="Select the status of the student"
                 >
-                    {status.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
+                    <MenuItem value={"Active"}>Active</MenuItem>
+                    <MenuItem value={"Inactive"}>InActive</MenuItem>                
                 </TextField>
             </div>
             <div className="flex flex-row items-center gap-5">
                 <Link to="/admin/pg"
-                    className="px-2 py-1 bg-rose-700 text-gray-50 rounded-md"
-                >
+                    className="px-2 py-1 bg-rose-700 text-gray-50 rounded-md">
                     Cancel
                 </Link>
-                <button className="px-2 py-1 bg-green-900 text-gray-50 rounded-md">
+                <Link to="/admin/pg"
+                    onClick={submit}
+                    className="px-2 py-1 bg-green-900 text-gray-50 rounded-md"
+                >
                     Submit
-                </button>
+                </Link>
             </div>
 
         </div>

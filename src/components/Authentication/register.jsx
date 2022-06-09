@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { AiOutlineClose } from "react-icons/ai";
+
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -10,18 +13,31 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 
+
+//Redux actins
+import { signUp } from '../../Redux/Reducer/Auth/auth.action';
+
+
 const Register = () => {
     const [values, setValues] = React.useState({
-        name: "",
+        fullName: "",
         institution: "",
-        statDentalCouncilNumber: "",
+        stateDentalCode: "",
         state: "",
-        number: "",
+        phoneNumber: "",
+        email: "",
         password: '',
+        cpassword: '',
         address: "",
+        typeOfRegistration: "",
         showPassword: false,
 
       });
+      const [errorMsg, setErrorMsg] = useState({
+        show: false,
+        hide: true,
+        message: "",
+      })
     
       const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -41,58 +57,102 @@ const Register = () => {
     const registrationType = [
         { value : "" }
     ]
-    const [currency, setCurrency] = React.useState('EUR');
 
-  const handleChanges = (event) => {
-    setCurrency(event.target.value);
-  };
+
+  const dispatch = useDispatch();
+  const reduxState = useSelector((globalState) => globalState.AuthReducer);
+
+  const submit = () => {
+        dispatch(signUp(values));
+        setValues({
+            fullName: "",
+            institution: "",
+            stateDentalCode: "",
+            state: "",
+            phoneNumber: "",
+            email: "",
+            password: '',
+            address: "",
+            typeOfRegistration: "",
+            showPassword: false,
+        })
+        if(reduxState?.error?.response.data.error) {
+            setErrorMsg({show: true, hide: false, message: reduxState?.error.response.data.error});
+          }          
+    }
+    const closeError = () => {
+        setErrorMsg({
+          show: false,
+          hide: true,
+          message: "",
+        })
+        }
 
 
   return (
     <div className="bg-gray-50 border rounded-md py-10 mx-4 md:mx-20 lg:mx-52 shadow-xl">
+        {errorMsg?.show && 
+            <div className="flex w-full items-center justify-between bg-red-500 p-2 text-white font-light">
+                {errorMsg.message} 
+                <button onClick={closeError}>
+                    <AiOutlineClose className="w-6 h-6"/>
+                </button>
+            </div> 
+        }
         <h2 className="mx-40 text-2xl font-bold text-gray-500 mb-4">Register</h2>
         <div className="flex flex-col lg:flex-row items-center justify-center gap-5">
             <div className="flex flex-col items-center gap-5 w-72">                
                 <TextField
                     required
-                    id="outlined-required"
+                    id="fullName"
                     label="Your name"  
+                    value={values.fullName}
                     fullWidth
+                    onChange={handleChange('fullName')}
                 />
                 <TextField
                     required
-                    id="outlined-required"
+                    id="insitution"
                     label="Institution"                             
+                    value={values.institution}
                     fullWidth
+                    onChange={handleChange('institution')}
                 />
                 <TextField
                     required
-                    id="outlined-required"
+                    id="stateDentalCode"
                     label="State Dental Council Number"                             
+                    value={values.stateDentalCode}
                     fullWidth
+                    onChange={handleChange('stateDentalCode')}
                 />
                 <TextField
                     required
-                    id="outlined-required"
+                    id="state"
                     label="State of Registration"                             
+                    value={values.state}
                     fullWidth
+                    onChange={handleChange('state')}
                 />
                 
             </div>
             <div className="flex flex-col items-center gap-5 w-72">                
                 <TextField
                     required
-                    id="outlined-required"
+                    id="phoneNumber"
                     label="Mobile Number"  
+                    value={values.phoneNumber}
                     fullWidth
+                    onChange={handleChange('phoneNumber')}
                 />
                 <TextField
-                    id="Type of Registration"
+                    id="typeOfRegistration"
                     select
                     fullWidth
+                    value={values.typeOfRegistration}
                     label="Type Of Registration"
                     //value={currency}
-                    onChange={handleChanges}
+                    onChange={handleChange('typeOfRegistration')}
                     //helperText="Type of Registration"
                 >
          
@@ -103,9 +163,9 @@ const Register = () => {
                 <FormControl variant="outlined" fullWidth>
                     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                     <OutlinedInput
-                        id="outlined-adornment-password"
+                        id="password"
                         type={values.showPassword ? 'text' : 'password'}
-                        value={values.password}
+                        //value={values.password}
                         onChange={handleChange('password')}
                         endAdornment={
                         <InputAdornment position="end">
@@ -127,7 +187,7 @@ const Register = () => {
                     <OutlinedInput
                         id="outlined-adornment-password"
                         type={values.showPassword ? 'text' : 'password'}
-                        value={values.password}
+                        //value={values.password}
                         onChange={handleChange('password')}
                         endAdornment={
                         <InputAdornment position="end">
@@ -148,20 +208,24 @@ const Register = () => {
             <div className="flex flex-col items-center gap-6 w-72">  
                 <TextField
                     required
-                    id="outlined-required"
-                    label="Your name"  
+                    id="email"
+                    label="Your email"  
+                    value={values.email}
                     fullWidth
+                    onChange={handleChange('email')}
                 />                              
                 <TextField
-                    id="outlined-multiline-static"
+                    id="address"
                     label="address"
+                    onChange={handleChange('address')}
+                    value={values.address}
                     multiline
                     rows={4}
                     fullWidth
                     //defaultValue="address"
                 />
                 
-                <Button variant="outlined" fullWidth className="h-14" >Register</Button>
+                <Button variant="outlined" fullWidth className="h-14" onClick={submit}>Register</Button>
                 
             </div>
         </div>

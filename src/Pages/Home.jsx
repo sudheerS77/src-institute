@@ -1,29 +1,37 @@
-import React from 'react'
+import React, {useEffect} from 'react';
+import { useDispatch } from "react-redux";
 
 //components
 //import NavBar from "../components/Navbar/NavBar";
 import HeroCarousals from '../components/Carousals/HeroCarousals';
 import AboutDep from '../components/aboutDep';
-import Faculty from '../components/Faculty/faculty';
-import VisitingFaculty from '../components/Faculty/visitingFaculty';
-import PG from '../components/PG/pg';
 import Footer from '../components/footer';
 import NavBar from '../components/Navbar/NavBar';
 
+//Redux actions
+
 const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    //dispatch();
+  }, []);
+
   return (
     <>        
       <NavBar />
-      <div className="bg-indigo-50 relative top-20">        
+      <div className="bg-indigo-50 relative top-20 pb-20">        
         <div className="border-red-900">
           <HeroCarousals />
         </div>
         <AboutDep />
-        <Faculty />
+        {/* <Faculty />
         <VisitingFaculty />
-        <PG />
+        <PG /> */}
       </div>
-      <Footer />
+      <div className="pt-10">
+        <Footer />
+      </div>
     </>
   )
 }

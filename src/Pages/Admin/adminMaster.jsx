@@ -2,7 +2,6 @@ import React from 'react'
 import { useParams } from "react-router-dom";
 
 //Pages
-import AdminHomePage from './admin.home';
 import EventsPage from "./events.page";
 import FacultyPage from './faculty.page';
 import PGPage from './pg.page';
@@ -10,12 +9,18 @@ import VisitingFacultyPage from './visitingfaculty.page';
 import ProjectsPage from './projects.page';
 import AchievementsPage from './achievements.page';
 import GalleryPage from './gallery.page';
+import UserPage from './user.page';
+import SliderPage from './slider.page';
+import FeedbackPage from './AFeedback/feedback.page';
+import BrochurePage from './Brochure/brochure.page';
 
 const AdminMaster = () => {
   let { type }= useParams();
+  console.log(type);
   return (
     <div>
-      { type === "users" && <AdminHomePage /> }
+      { type === "users" && <UserPage urltype={type}/> }
+      { type === "adduser" && <UserPage urltype={type}/> }
       { type === "events" && <EventsPage urltype={type}/> }
       { type === "addevent" && <EventsPage urltype={type}/> }
       { type === "faculty" && <FacultyPage urltype={type}/> }
@@ -30,6 +35,13 @@ const AdminMaster = () => {
       { type === "addachievement" && <AchievementsPage urltype={type}/> }
       { type === "gallery" && <GalleryPage urltype={type}/> }
       { type === "addimage" && <GalleryPage urltype={type}/> }
+      { type === "slider" && <SliderPage urltype={type}/> }
+      { type === "addslider" && <SliderPage urltype={type}/> }
+      { type === "brochure" && <BrochurePage urltype={type}/> }
+      { type === "addbrochure" && <BrochurePage urltype={type}/> }
+      { type === "feedback" && <FeedbackPage urltype={type}/> }
+      { type === "add-faculty-feedback" && <FeedbackPage urltype={type}/> }
+
 
     </div>
   );

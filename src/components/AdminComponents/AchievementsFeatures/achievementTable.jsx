@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from 'react-router-dom';
 import { BiEdit } from "react-icons/bi";
 import { MdDelete, MdViewInAr } from "react-icons/md";
 import Table from "@mui/material/Table";
@@ -8,34 +10,33 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import AddAchievement from './addAchievement';
 
-const AchievementTable = (props) => {
-    const rows = [
-      {
-        id: 1,
-        name: "Project name",
-        img: "https://oralpath.sriher.com/resources/pcadmin/img/faculties/1257593313__VKP9672-min.jpg",
-        description: "TEACHING AND RESEARCH I have an interest in baking cakes and am the co-founder of Sumira_bakeology( Home Baker).Also have a profound interest in the Gospel, reading books and listening to piano pieces.",
-      },
-      {
-        id: 2,
-        name: "Project name",
-        img: "https://oralpath.sriher.com/resources/pcadmin/img/faculties/1257593313__VKP9672-min.jpg",
-        description: "TEACHING AND RESEARCH I have an interest in baking cakes and am the co-founder of Sumira_bakeology( Home Baker).Also have a profound interest in the Gospel, reading books and listening to piano pieces.",
-      },
-      {
-        id: 3,
-        name: "Project name",
-        img: "https://oralpath.sriher.com/resources/pcadmin/img/faculties/1257593313__VKP9672-min.jpg",
-        description: "TEACHING AND RESEARCH I have an interest in baking cakes and am the co-founder of Sumira_bakeology( Home Baker).Also have a profound interest in the Gospel, reading books and listening to piano pieces.",
-      },
-      {
-        id: 4,
-        name: "Project name",
-        img: "https://oralpath.sriher.com/resources/pcadmin/img/faculties/1257593313__VKP9672-min.jpg",
-        description: "TEACHING AND RESEARCH I have an interest in baking cakes and am the co-founder of Sumira_bakeology( Home Baker).Also have a profound interest in the Gospel, reading books and listening to piano pieces.",
-      },                 
-    ];
+//Redux actions
+import { deleteAchievement, getAchievement } from "../../../Redux/Reducer/Achivements/achievements.action"
+
+
+const AchievementTable = () => {
+  const [achievements, setAchievements] = useState([]);
+
+  const dispatch = useDispatch();
+
+  const reduxState = useSelector((globalStore) => globalStore.achievement);
+
+  useEffect(() => {
+    dispatch(getAchievement());
+  }, []);
+
+  useEffect(() => {
+      reduxState?.achievements && setAchievements(reduxState.achievements.achievememts);
+  }, [reduxState]);
+    
+  let idCount = 1;
+
+  const deleteItem = (_id) => {
+    dispatch(deleteAchievement(_id));
+    window.location.reload();
+  }
 
   return (
     <>
@@ -45,34 +46,42 @@ const AchievementTable = (props) => {
           <TableRow>
             <TableCell className="tableCell">ID</TableCell>
             <TableCell className="tableCell">Project Name</TableCell>
-            <TableCell className="tableCell">Description</TableCell>            
-            <TableCell className="tableCell">View</TableCell>
+            <TableCell className="tableCell">Description</TableCell>           
+            <TableCell className="tableCell">User Type</TableCell>
             <TableCell className="tableCell">Edit</TableCell>
             <TableCell className="tableCell">Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (            
-            <TableRow key={row.id}  className="hover:bg-gray-100">
-              <TableCell className="tableCell">{row.id}</TableCell>
+          { achievements?.length > 0 ? (
+          achievements?.map((row) => (            
+            <TableRow key={row._id}  className="hover:bg-gray-100">
+              <TableCell className="tableCell">{idCount++}</TableCell>
               <TableCell className="tableCell">
                 <div className="flex items-center">
-                  <img src={row.img} alt="" className="w-12 h-12 rounded-md mr-10 fit" />
+                  <img src={row.image} alt="" className="w-12 h-12 rounded-md mr-10 fit" />
                   {row.name}
                 </div>
               </TableCell>
-              <TableCell className="tableCell w-96" >{row.description}</TableCell>
-              <TableCell className="tableCell">
-                  <MdViewInAr className="w-6 h-6 text-sky-900"/>
+              <TableCell className="tableCell w-96" >
+                <p className="w-64 truncate">{row.description}</p>
               </TableCell>
+              <TableCell className="tableCell">{row.userType}</TableCell>
+              
               <TableCell className="tableCell">
+                <Link to={`/admin/achievemnts/${row._id}`}>
                   <BiEdit className="w-6 h-6 text-blue-600"/>
+                </Link>
               </TableCell>  
               <TableCell className="tableCell">
+                <Link to="/admin/achievements"
+                  onClick={() => deleteItem(row._id)}
+                >
                   <MdDelete className="w-6 h-6 text-red-600"/>
-                </TableCell>  
+                </Link>
+              </TableCell>  
             </TableRow>
-          ))}
+          ))): <></>}
         </TableBody>
       </Table>
     </TableContainer>  

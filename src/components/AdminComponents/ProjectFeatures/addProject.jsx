@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 
-const AddProject = () => {
-    const status = [
-        {
-          value: 'Active',
-          label: 'Active',
-        },
-        {
-          value: 'Inactive',
-          label: 'InActive',
-        },
-        
-      ];
-    const [statusValue, setStatusValue] = useState();
+//Redux actions
+import { addProject } from "../../../Redux/Reducer/Projects/project.action";
 
-    const handleChange = (event) => {
-        setStatusValue(event.target.value);
+
+const AddProject = () => {
+    const [projects, setProjects] = useState([]);    
+
+    const dispatch = useDispatch();
+    const submit = () => {
+        dispatch(
+            addProject({
+            ...projects,
+          })
+        );        
     };
   return (
     <>
@@ -28,44 +27,37 @@ const AddProject = () => {
                     required
                     id="outlined-required"
                     label="Project name"
+                    onChange={(e) => setProjects((prev) => ({...prev, projectName: e.target.value}))}                                        
                 />
                 <TextField
                     required
                     id="outlined-required"
                     label="Image url"
+                    onChange={(e) => setProjects((prev) => ({...prev, image: e.target.value}))}                                        
                     fullWidth
                 />
                 <TextField
                     required
                     id="outlined-required"
                     label="description"
+                    onChange={(e) => setProjects((prev) => ({...prev, description: e.target.value}))}                                        
                     fullWidth
                     multiline
                     maxRows={4}
-                />                
-                {/* <TextField
-                    id="outlined-required"
-                    select
-                    label="Select"
-                    value={statusValue}
-                    onChange={handleChange}
-                    helperText="Select the status of the student"
-                >
-                    {status.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
-                </TextField> */}
+                />        
+                                       
             </div>
             <div className="flex flex-row items-center gap-5">
                 <Link to="/admin/projects"
                     className="px-2 py-1 bg-rose-700 text-gray-50 rounded-md">
                     Cancel
                 </Link>
-                <button className="px-2 py-1 bg-green-900 text-gray-50 rounded-md">
+                <Link to="/admin/projects"
+                    onClick={submit}
+                    className="px-2 py-1 bg-green-900 text-gray-50 rounded-md"
+                >
                     Submit
-                </button>
+                </Link>
             </div>
 
         </div>

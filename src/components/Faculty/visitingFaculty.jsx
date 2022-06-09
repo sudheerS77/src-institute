@@ -7,32 +7,7 @@ import FacultyCarousal from "./faculty.Carousal";
 import { NextArrows, PrevArrows } from '../CarousalArrows';
 
 const VisitingFaculty = () => {
-    const [facult, setFaculty] = useState([
-        {
-            image: "https://oralpath.sriher.com/resources/pcadmin/img/faculties/1632921415_Dr.WM%20Tilakratne.jpg",
-            name: "DR.WM TILAKARATNE",
-            deg: "",
-            position: "VISITING PROFESSOR.",
-        },
-        {
-            image: "https://oralpath.sriher.com/resources/pcadmin/img/faculties/1601391429_Dr.Ranganathan.JPG",
-            name: "DR.K. RANGANATHAN",
-            deg: "",
-            position: "ADJUNCT PROFESSOR",
-        },
-        {
-            image: "https://oralpath.sriher.com/resources/pcadmin/img/faculties/1775476323_Dr.Anand%20Ramanathan.jpg",
-            name: "DR.ANAND RAMANATHAN",
-            deg: "",
-            position: "VISITING PROFESSOR.",
-        }, 
-        {
-          image: "https://oralpath.sriher.com/resources/pcadmin/img/faculties/1601391429_Dr.Ranganathan.JPG",
-          name: "DR.K. RANGANATHAN",
-          deg: "",
-          position: "ADJUNCT PROFESSOR",
-      },       
-    ]);
+    const [facult, setFaculty] = useState([]);
 
     const settings = {
         dots: false,

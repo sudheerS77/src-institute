@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 
 
 //Components
 import { NextArrows, PrevArrows } from '../CarousalArrows';
 import { LGImageCarousal, SMImageCarousal } from './ImageCarousal';
+
+//Redux action
+import { getSlider } from '../../Redux/Reducer/Slider/slider.action';
 
 const HeroCarousals = () => {
 
@@ -64,6 +68,23 @@ const HeroCarousals = () => {
           }
         ]
       };
+      const [sliderImages, setSliderImages] = useState([]);
+        
+      const reduxState = useSelector((globalStore) => globalStore.Slider);
+      
+      useEffect(() => {
+        reduxState?.slider && setSliderImages(reduxState.slider.data);
+      }, [reduxState]);
+  
+      let idCount = 1;
+  
+      const dispatch = useDispatch();
+  
+      useEffect(() => {
+        dispatch(getSlider());      
+      }, []);
+
+      console.log(sliderImages);
 
     
   return (
@@ -71,9 +92,9 @@ const HeroCarousals = () => {
         <div className="hidden lg:block md:mt-0 md:mx-6 md:px-4 ml-2.5">        
             <Slider {...settings} >
             {
-                heroBanners.map((image) => (
+                sliderImages?.map((data) => (
                    <div className="md:px-0.5">
-                        <LGImageCarousal image={image} /> 
+                        <LGImageCarousal image={data.image} /> 
                    </div>               
                 ))
             }
@@ -82,9 +103,9 @@ const HeroCarousals = () => {
         <div className='h-full md:hidden'>
           <Slider {...settings} >
               {
-                  heroBanners.map((image) => (
+                  sliderImages?.map((data) => (
                     <div>
-                          <SMImageCarousal image={image} /> 
+                          <SMImageCarousal image={data.image} /> 
                     </div>               
                   ))
               }

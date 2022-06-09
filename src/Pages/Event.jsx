@@ -1,27 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+
+//Components
+import Footer from '../components/footer'
+import NavBar from '../components/Navbar/NavBar'
 import OnGoingEvents from '../components/Events/onGoingEvents'
 import CompletedEvents from '../components/Events/completedEvents'
 
-//Components
-import Tag from '../components/Tag'
-import Footer from '../components/footer'
-import NavBar from '../components/Navbar/NavBar'
+//Redux actions
+import { getEvents } from '../Redux/Reducer/Events/event.action';
+import { getPg } from '../Redux/Reducer/Pg/pg.action';
 
 const Event = () => {
+  const [eventData, setEventsData] = useState([]);
+  const [onGoingEventsCount, setOnGoingEventsCount] = useState(0);
+  const [completedEventsCount, setCompletedEventsCount] = useState(0);
+
+
+  const dispatch = useDispatch();
+  const reduxState = useSelector((globalStore) => globalStore.event);
+
+  useEffect(() => {
+    reduxState?.events && setEventsData(reduxState.events?.events);
+  }, [reduxState?.events]);
+
+  useEffect(() => {
+    dispatch(getEvents());
+  }, []);
+  useEffect(() => {    
+    eventData?.map((data) => {
+      console.log(data);
+      //data.status !== "complete" ? setOnGoingEventsCount(onGoingEventsCount+1) : setCompletedEventsCount(completedEventsCount+1) 
+      if(data.status === "active") {
+        setOnGoingEventsCount(onGoingEventsCount+1);
+      }
+      if(data.status === "inactive"){
+        setCompletedEventsCount(completedEventsCount+1);
+      }
+    });
+  }, [reduxState?.events]);
+
   return (
     <>
     <NavBar />
-    <div className="bg-purple-50">
-      <div className='lg:w-full h-32 lg:-mb-1.5'></div>
+    <div className="border-2">
+      {/* <div className='lg:w-full h-32 lg:-mb-1.5'></div> */}
       {/* <div className="md:ml-10 w-2/5">
         <Tag eventName={"Events"} />
       </div> */}
-      <div className="flex flex-row items-center justify-around md:justify-start md:gap-10 mt-5 md:ml-10">
-        <div className="w-40 md:w-72 h-24 md:h-36 bg-cyan-600 rounded-xl flex items-center justify-center shadow-xl">
-          <h4 className="text-md md:text-xl text-gray-50 font-light">Upcoming Events 2</h4>
+      <div className="flex flex-row items-center justify-around md:justify-start md:gap-10 mt-20 md:mt-40 md:ml-10">
+        <div className="w-40 md:w-72 h-24 md:h-36  rounded-xl flex items-center justify-center shadow-xl border">
+          <h4 className="text-sm md:text-xl text-gray-900 font-bold">onGoingEvents Events {onGoingEventsCount}</h4>
         </div>
-        <div className="w-40 md:w-72 h-24 md:h-36 bg-sky-900 rounded-xl flex items-center justify-center shadow-xl">
-          <h4 className="text-md md:text-xl text-gray-50 font-light">Upcoming Events 2</h4>
+        <div className="w-40 md:w-72 h-24 md:h-36 rounded-xl flex items-center justify-center shadow-xl border">
+          <h4 className="text-sm md:text-xl text-gray-900 font-bold">Completed Events {completedEventsCount}</h4>
         </div>
       </div>
      
@@ -30,10 +62,7 @@ const Event = () => {
         <OnGoingEvents />
         <CompletedEvents />
       </div>
-    
-    <Footer />
-
-    </div>
+      </div>
 
     </>
   )

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import Table from "@mui/material/Table";
@@ -9,7 +10,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-const DetailsTable = (props) => {
+const DetailsTable = () => {
+  const [eventData, setEventsData] = useState([]);
+  var count = 1;
     const rows = [
       {
         id: 1,
@@ -62,6 +65,13 @@ const DetailsTable = (props) => {
   
       
     ];
+    const reduxState = useSelector((globalStore) => globalStore.event);
+
+  useEffect(() => {
+    reduxState?.events && setEventsData(reduxState.events?.events);
+  }, [reduxState?.events]);
+  const dispatch = useDispatch();
+
   return (
     <>
         <TableContainer component={Paper} className="table">
@@ -78,12 +88,12 @@ const DetailsTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (            
+          {eventData?.map((row) => (            
             <TableRow key={row.id} className="hover:bg-gray-100">
-              <TableCell className="tableCell">{row.id}</TableCell>
+              <TableCell className="tableCell">{count++}</TableCell>
               <TableCell className="tableCell">
                 <div className="flex items-center">
-                  <img src={row.img} alt="" className="w-12 h-12 rounded-md mr-10 fit" />
+                  <img src={row.image} alt="" className="w-12 h-12 rounded-md mr-10 fit" />
                   {row.eventName}
                 </div>
               </TableCell>

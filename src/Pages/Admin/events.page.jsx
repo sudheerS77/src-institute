@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FaUserFriends } from 'react-icons/fa';
   import { IoMdAdd } from 'react-icons/io';
@@ -10,21 +11,38 @@ import Card from '../../components/AdminComponents/card';
 import DetailsTable from '../../components/AdminComponents/DetailsTable';
 import AddEvent from '../../components/AdminComponents/EventFeatures/addEvent';
 
+//Redux actions
+import { getEvents } from '../../Redux/Reducer/Events/event.action';
+import EventTable from '../../components/AdminComponents/EventFeatures/eventTable';
+import UpdateEvent from '../../components/AdminComponents/EventFeatures/updateEvent';
+
 const EventsPage = (props) => {
+  const [eventData, setEventsData] = useState([]);
   const cardData = [
     {
       name: "EVENTS",
-      count: 720,
+      count: eventData?.length,
       link: "see all Events",
       linkUrl: "/admin/events",
       icon: <FaUserFriends />,
     }
   ]
+
+  const reduxState = useSelector((globalStore) => globalStore.event);
+
+  useEffect(() => {
+    reduxState?.events && setEventsData(reduxState.events?.events);
+  }, [reduxState?.events]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getEvents());
+  }, []);
   
   return (
     <>
         <div className="flex flex-row w-full">
-            <div className="w-1/4">
+            <div className="w-1/5">
               <SideBar />
             </div>
             <div className="w-full flex flex-col gap-5">
@@ -44,8 +62,9 @@ const EventsPage = (props) => {
                   </Link>
                 </div>
                 <div className='mx-10 shadow-xl'>
-                  { props.urltype === "events" && <DetailsTable /> }
+                  { props.urltype === "events" && <EventTable /> }
                   { props.urltype === "addevent" && <AddEvent /> }
+                  {/* { props.urltype === "id" && <UpdateEvent /> } */}
                 </div>
               </div>
             </div>

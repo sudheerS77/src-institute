@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
-
 import { IoMdAdd } from 'react-icons/io';
 import { FaUserTie } from 'react-icons/fa';
 
@@ -10,12 +10,30 @@ import AdminNavBar from '../../components/AdminComponents/adminNavBar';
 import Card from '../../components/AdminComponents/card';
 import AchievementTable from "../../components/AdminComponents/AchievementsFeatures/achievementTable";
 import AddAchievement from "../../components/AdminComponents/AchievementsFeatures/addAchievement";
+import UpdateAchievement from '../../components/AdminComponents/AchievementsFeatures/updateAchievement';
+import AchUpdate from './achievemenetUpdate.page';
+
+//Redux actions
+import { getAchievement } from '../../Redux/Reducer/Achivements/achievements.action';
 
 const AchievementsPage = (props) => {
+  const [achievements, setAchievements] = useState([]);
+
+  const dispatch = useDispatch();
+  const reduxState = useSelector((globalStore) => globalStore.achievement);
+
+  useEffect(() => {
+      reduxState?.achievements && setAchievements(reduxState.achievements.achievememts);
+  }, [reduxState]);
+
+  useEffect(() => {
+    dispatch(getAchievement());
+  }, []);
+
     const cardData = [
         {
             name: "ACHIEVEMENTS",
-            count: 12,
+            count: achievements?.length,
             link: "View all achievements",
             linkUrl: "/admin/achievements",
             icon: <FaUserTie />,
@@ -25,7 +43,7 @@ const AchievementsPage = (props) => {
   return (
     <>
         <div className="flex flex-row w-full">
-            <div className="w-1/4">
+            <div className="w-1/5">
               <SideBar />
             </div>
             <div className="w-full flex flex-col gap-5">
@@ -45,7 +63,7 @@ const AchievementsPage = (props) => {
                 </div>
                 <div className='mx-10'>
                   { props.urltype === "achievements" && <AchievementTable />  }
-                  { props.urltype === "addachievement" && <AddAchievement /> }
+                  { props.urltype === "addachievement" && <AddAchievement /> } 
                 </div>
               </div>
             </div>

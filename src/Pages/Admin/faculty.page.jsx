@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { IoMdAdd } from 'react-icons/io';
@@ -11,21 +12,36 @@ import Card from '../../components/AdminComponents/card';
 import DetailsTable from '../../components/AdminComponents/DetailsTable';
 import FacultyTable from '../../components/AdminComponents/FacultyFeatures/facultyTable';
 import AddFaculty from '../../components/AdminComponents/FacultyFeatures/addFaculty';
+import UpdateFaculty from '../../components/AdminComponents/FacultyFeatures/updateFaculty';
+
+//Redux actions
+import { getFaculty } from "../../Redux/Reducer/Faculty/faculty.action";
 
 const FacultyPage = (props) => {
-    const cardData = [
+  const [facultyData, setFacultyData] = useState([]);  
+  const cardData = [
         {
             name: "FACULTY",
-            count: 12,
+            count: facultyData?.length,
             link: "View all faculty",
             linkUrl: "/admin/faculty",
             icon: <FaUserTie />,
         },
-      ]
+    ]
+  const reduxState = useSelector((globalStore) => globalStore.faculty)
+  const dispatch = useDispatch();
+  useEffect(() => {
+   dispatch(getFaculty());
+ }, [])
+    
+  useEffect(() => {
+    reduxState?.faculty && setFacultyData(reduxState?.faculty.data);
+  }, [reduxState?.faculty]);
+
   return (
     <>
         <div className="flex flex-row w-full">
-            <div className="w-1/4">
+            <div className="w-1/5">
               <SideBar />
             </div>
             <div className="w-full flex flex-col gap-5">
@@ -47,6 +63,7 @@ const FacultyPage = (props) => {
                 <div className='mx-10'>
                   { props.urltype === "faculty" && <FacultyTable /> }
                   { props.urltype === "addfaculty" && <AddFaculty /> }
+                  { props.urltype === "id" && <UpdateFaculty /> }
                 </div>
               </div>
             </div>

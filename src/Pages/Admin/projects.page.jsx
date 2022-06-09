@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState,useEffect} from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 
 import { IoMdAdd } from 'react-icons/io';
-import { FaUserTie } from 'react-icons/fa';
+import { GrProjects} from 'react-icons/gr';
 
 //Components
 import SideBar from '../../components/AdminComponents/siderbar'
@@ -11,20 +12,37 @@ import Card from '../../components/AdminComponents/card';
 import AddProject from "../../components/AdminComponents/ProjectFeatures/addProject";
 import ProjectTable from "../../components/AdminComponents/ProjectFeatures/projectTable";
 
+//Redux actions
+import { getProject } from '../../Redux/Reducer/Projects/project.action';
+import UpdateProject from '../../components/AdminComponents/ProjectFeatures/updateProject';
+
 const ProjectsPage = (props) => {
+  const [projects, setProjects] = useState([]);    
+
+  const reduxState = useSelector((globalStore) => globalStore.project);
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(getProject());
+    }, []);
+
+    useEffect(() => {
+      reduxState?.projects && setProjects(reduxState.projects.projects);
+    }, [reduxState?.projects]);
+
     const cardData = [
         {
             name: "PROJECTS",
-            count: 12,
+            count: projects?.length,
             link: "View all projects",
             linkUrl: "/admin/projects",
-            icon: <FaUserTie />,
+            icon: <GrProjects />,
         },
       ]
   return (
     <>
         <div className="flex flex-row w-full">
-            <div className="w-1/4">
+            <div className="w-1/5">
               <SideBar />
             </div>
             <div className="w-full flex flex-col gap-5">
@@ -46,6 +64,7 @@ const ProjectsPage = (props) => {
                 <div className='mx-10'>
                   { props.urltype === "projects" && <ProjectTable />  }
                   { props.urltype === "addproject" && <AddProject /> }
+                  { props.urltype === "id" && <UpdateProject /> }
                 </div>
               </div>
             </div>
