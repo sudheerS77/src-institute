@@ -7,7 +7,7 @@ export const getFeedback = () => async (dispatch) => {
     try {
         const feedbackList = await axios({
             method: "GET",
-            url: "http://localhost:4000/feedback/getfacultyfeedbackdata"
+            url: "https://sriher.herokuapp.com/feedback/getfacultyfeedbackdata"
         }).then((response) => {
             return response;
         });        
@@ -24,7 +24,7 @@ export const getFacultyFeedback = (_id) => async (dispatch) => {
         console.log("_ID"+_id);
         const facultyFeedbackList = await axios({
             method: "GET",
-            url: `http://localhost:4000/feedback/faculty-feedback/${_id}`
+            url: `https://sriher.herokuapp.com/feedback/faculty-feedback/${_id}`
         }).then((response) => {
             return response;
         });
@@ -41,7 +41,7 @@ export const getSpecificFeedback = (_id) => async (dispatch) => {
         console.log("_ID"+_id);
         const specificFacultyList = await axios({
             method: "GET",
-            url: `http://localhost:4000/feedback/get-ffaculty/${_id}`
+            url: `https://sriher.herokuapp.com/feedback/get-ffaculty/${_id}`
         }).then((response) => {
             return response;
         });
@@ -59,7 +59,7 @@ export const addUserFeedback = (feedbackData) => async (dispatch) => {
         console.log(feedbackData);
         const feedback = await axios({
             method: "POST",
-            url: "http://localhost:4000/feedback/add-user-feedback",
+            url: "https://sriher.herokuapp.com/feedback/add-user-feedback",
             data: {feedbackData},
         }).then((response) => {
             return response;
@@ -78,7 +78,7 @@ export const addFacultyForFeedback = (facultyData) => async (dispatch) => {
     try {
         const facultydata = await axios({
             method: "POST",
-            url: "http://localhost:4000/feedback/add-faculty-for-feedback",
+            url: "https://sriher.herokuapp.com/feedback/add-faculty-for-feedback",
             data: {facultyData},
         }).then((response) => {
             return response;
@@ -98,7 +98,7 @@ export const updateFeedbacFacultyData = (facultyData) => async (dispatch) => {
     try {
         const faculty = await axios({
             method: "PUT",
-            url: "http://localhost:4000/feedback/update-feedack-faculty",
+            url: "https://sriher.herokuapp.com/feedback/update-feedack-faculty",
             data: {facultyData},
         }).then((response) => {
             return response;
@@ -116,7 +116,7 @@ export const deleteFacultyFeedback = (_id) => async (dispatch) => {
     try {
         const deleteFac = await axios({
             method: "DELETE",
-            url: `http://localhost:4000/feedback/delete-faculty-feedback/${_id}`,
+            url: `https://sriher.herokuapp.com/feedback/delete-faculty-feedback/${_id}`,
         }).then((response) => {
             return response;
         });

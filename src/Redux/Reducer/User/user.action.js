@@ -7,7 +7,7 @@ export const getUser = (_id) => async (dispatch) => {
     try {
         const User = axios({
             method: "GET",
-            url: `http://localhost:4000/user/${_id}`
+            url: `https://sriher.herokuapp.com/user/${_id}`
         }).then((response) => {
             return response;
         });        
@@ -23,7 +23,7 @@ export const getAllUsers = () => async (dispatch) => {
     try {
         const userList = axios({
             method: "GET",
-            url: "http://localhost:4000/user/allusers"
+            url: "https://sriher.herokuapp.com/user/allusers"
         }).then((response) => {
             return response;
         });        
@@ -40,7 +40,7 @@ export const getAllUsers = () => async (dispatch) => {
 //     try {
 //         const specificProjectList = axios({
 //             method: "GET",
-//             url: `http://localhost:4000/user/get/${_id}`
+//             url: `https://sriher.herokuapp.com/user/get/${_id}`
 //         }).then((response) => {
 //             return response;
 //         });
@@ -54,7 +54,7 @@ export const addUser = (userData) => async (dispatch) => {
     try {
         const user = axios({
             method: "POST",
-            url: "http://localhost:4000/",
+            url: "https://sriher.herokuapp.com/",
             data: {userData},
         }).then((response) => {
             return response;
@@ -71,7 +71,7 @@ export const updateUserData = (userData) => async (dispatch) => {
     try {
         const user = axios({
             method: "PUT",
-            url: "http://localhost:4000/user/update",
+            url: "https://sriher.herokuapp.com/user/update",
             data: {userData},
         }).then((response) => {
             return response;
@@ -89,7 +89,7 @@ export const deleteUser = (_id) => async (dispatch) => {
     try {
         const deleteUser = axios({
             method: "DELETE",
-            url: `http://localhost:4000/user/delete/${_id}`,
+            url: `https://sriher.herokuapp.com/user/delete/${_id}`,
         }).then((response) => {
             return response;
         });
@@ -108,7 +108,7 @@ export const getMySelf = () => async (dispatch) => {
     try {
         const User = axios({
             method: "GET",
-            url: `http://localhost:4000/user/`
+            url: `https://sriher.herokuapp.com/user/`
         }).then((response) => {
             return response;
         });        

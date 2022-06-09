@@ -9,7 +9,7 @@ export const signIn = (userData) => async (dispatch) => {
     try {
         const User = axios({
             method: "POST",
-            url: "http://localhost:4000/auth/signin",
+            url: "https://sriher.herokuapp.com/auth/signin",
             data: { credentials: userData }
         }).then((response) => {
             return response;
@@ -35,7 +35,7 @@ export const signUp = (userData) => async (dispatch) => {
     try {
         const User = axios({
             method: "POST",
-            url: `http://localhost:4000/auth/signup`,
+            url: `https://sriher.herokuapp.com/auth/signup`,
             data: { credentials: userData }
         }).then((response) => {
             return response;
@@ -54,7 +54,7 @@ export const addUserByAdmin = (userData) => async (dispatch) => {
     try {
         const User = axios({
             method: "POST",
-            url: `http://localhost:4000/auth/signup`,
+            url: `https://sriher.herokuapp.com/auth/signup`,
             data: { credentials: userData }
         }).then((response) => {
             return response;
