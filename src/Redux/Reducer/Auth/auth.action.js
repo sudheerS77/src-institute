@@ -35,7 +35,7 @@ export const signUp = (userData) => async (dispatch) => {
     try {
         const User = axios({
             method: "POST",
-            url: `https://sriher.herokuapp.com/auth/signup`,
+            url: "https://sriher.herokuapp.com/auth/signup",
             data: { credentials: userData }
         }).then((response) => {
             return response;
@@ -54,7 +54,7 @@ export const addUserByAdmin = (userData) => async (dispatch) => {
     try {
         const User = axios({
             method: "POST",
-            url: `https://sriher.herokuapp.com/auth/signup`,
+            url: "https://sriher.herokuapp.com/auth/signup",
             data: { credentials: userData }
         }).then((response) => {
             return response;
@@ -71,7 +71,7 @@ export const signOut = () => async (dispatch) => {
     try {
       localStorage.removeItem("SRCUser");
       clearUser();
-      window.location.href = "http://localhost:3000/";
+      window.location.href = "https://sriher.herokuapp.com/";
       
       return dispatch({ type: SIGN_OUT, payload: {} });
     } catch (error) {
