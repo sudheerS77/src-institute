@@ -7,15 +7,15 @@ import { setError, hideError } from "../Errors/error.type";
 
 export const signIn = (userData) => async (dispatch) => {
     try {
-        const User = axios({
+        const User = await axios({
             method: "POST",
             url: "https://sriher.herokuapp.com/auth/signin",
             data: { credentials: userData }
         }).then((response) => {
             return response;
         });        
-        const userRole = (await User).data.userRole;
-        localStorage.setItem("SRCUser", JSON.stringify({ token: (await User).data.token }));
+        const userRole =  User.data.userRole;
+        localStorage.setItem("SRCUser", JSON.stringify({ token:  User.data.token }));
         if(userRole === "user") {
             window.location.href = "http://localhost:3000/"
         } 
@@ -23,7 +23,7 @@ export const signIn = (userData) => async (dispatch) => {
             window.location.href = "http://localhost:3000/admin"
         }
 
-        return dispatch({ type: SIGN_IN , payload: (await User).data });
+        return dispatch({ type: SIGN_IN , payload:  User.data });
     } catch (error) {
         setError(error)
         return dispatch({ type: ERROR, payload: error });
@@ -33,17 +33,17 @@ export const signIn = (userData) => async (dispatch) => {
 
 export const signUp = (userData) => async (dispatch) => {
     try {
-        const User = axios({
+        const User = await axios({
             method: "POST",
             url: "https://sriher.herokuapp.com/auth/signup",
             data: { credentials: userData }
         }).then((response) => {
             return response;
         });        
-        localStorage.setItem("SRCUser", JSON.stringify({ token: (await User).data.token }));
+        localStorage.setItem("SRCUser", JSON.stringify({ token:  User.data.token }));
         window.location.href = "http://localhost:3000/"
         
-        return dispatch({ type: SIGN_UP , payload: (await User).data });
+        return dispatch({ type: SIGN_UP , payload:  User.data });
     } catch (error) {
         return dispatch({ type: ERROR, payload: error });
     }
@@ -52,14 +52,14 @@ export const signUp = (userData) => async (dispatch) => {
 
 export const addUserByAdmin = (userData) => async (dispatch) => {
     try {
-        const User = axios({
+        const User = await axios({
             method: "POST",
             url: "https://sriher.herokuapp.com/auth/signup",
             data: { credentials: userData }
         }).then((response) => {
             return response;
         });                
-        return dispatch({ type: SIGN_UP , payload: (await User).data });
+        return dispatch({ type: SIGN_UP , payload:  User.data });
     } catch (error) {
         return dispatch({ type: ERROR, payload: error });
     }
