@@ -7,7 +7,7 @@ export const getPg = () => async (dispatch) => {
     try {
         const pgList = axios({
             method: "GET",
-            url: "https://sriher.herokuapp.com/pg/"
+            url: "http://localhost:4000/pg/"
         }).then((response) => {
             return response;
         });        
@@ -23,7 +23,7 @@ export const getSpecificPG = (_id) => async (dispatch) => {
     try {
         const specificPgList = axios({
             method: "GET",
-            url: `https://sriher.herokuapp.com/pg/get-pg/${_id}`
+            url: `http://localhost:4000/pg/get-pg/${_id}`
         }).then((response) => {
             return response;
         });
@@ -40,7 +40,7 @@ export const addPg = (pgData) => async (dispatch) => {
     try {
         const pg = axios({
             method: "POST",
-            url: "https://sriher.herokuapp.com/pg/add-pg",
+            url: "http://localhost:4000/pg/add-pg",
             data: {pgData},
         }).then((response) => {
             return response;
@@ -57,7 +57,7 @@ export const updatePgData = (pgData) => async (dispatch) => {
     try {
         const pg = axios({
             method: "PUT",
-            url: "https://sriher.herokuapp.com/pg/update-pg",
+            url: "http://localhost:4000/pg/update-pg",
             data: {pgData},
         }).then((response) => {
             return response;
@@ -75,7 +75,7 @@ export const deletePg = (_id) => async (dispatch) => {
     try {
         const deletePg = axios({
             method: "DELETE",
-            url: `https://sriher.herokuapp.com/pg/delete-pg/${_id}`,
+            url: `http://localhost:4000/pg/delete-pg/${_id}`,
         }).then((response) => {
             return response;
         });

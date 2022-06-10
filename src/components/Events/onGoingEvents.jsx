@@ -126,9 +126,25 @@ console.log(eventData);
               </div>
               <div className="flex flex-col items-start gap-3 w-full md:w-1/2">
                 <h2 className="text-xl font-bold">{data.eventName}</h2>
+                <div className="flex items-start gap-3">
+                  <h4 className="text-lg font-semibold w-1/4">Speakers</h4>
+                  <p className="text-sm lg:text-lg font-light text-gray-800 w-full">{data.speaker}</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <h4 className="text-lg font-semibold w-1/4">Eligibility</h4>
+                  <p className="text-sm lg:text-lg font-light text-gray-800 w-full">{data.eligibility.join(" , ")}</p>
+                </div>
                 <p className="text-sm lg:text-lg font-light text-gray-800">{data.description}</p>
+
               </div>
               <div>
+                {/* <div>
+                  <p className="text-sm lg:text-lg font-light text-gray-800">{data.conferenceStartDate}</p>
+                  <p className="text-sm lg:text-lg font-light text-gray-800">{data.conferenceEndDate}</p>
+                </div> */}
+                <div>
+                  
+                </div>
                 <button 
                   className="bg-green-400 px-4 py-2 rounded-lg"
                   onClick={() => { eventRegister({data}) }}
@@ -163,3 +179,36 @@ console.log(eventData);
 }
 
 export default OnGoingEvents;
+// {
+//   "_id": "629f94cea52f728051002a1d",
+//   "eventName": "demoEvent",
+//   "subHeading": "sub",
+//   "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos, nesciunt pariatur fugiat quo doloribus reprehenderit labore architecto repellendus dolores consectetur ullam, deserunt iure laborum facere, perferendis dolorem voluptas commodi! Veritatis.",
+//   "specialNotes": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos, nesciunt pariatur fugiat quo doloribus reprehenderit labore architecto repellendus dolores consectetur ullam, deserunt iure laborum facere, perferendis dolorem voluptas commodi! Veritatis.",
+//   "speaker": [
+//       "DR.RAGHU DHANAPAL",
+//       "DR.SHREENIVAS, S. VANAKI",
+//       "DR.ABIKSHYEET PANDA "
+//   ],
+//   "organiser": [
+//       "Dr.H.Thamizhchelvan",
+//       "Dr.N.Malathi"
+//   ],
+//   "eligibility": [
+//       "Postgraduates",
+//       "Faculty",
+//       "International"
+//   ],
+//   "status": "active",
+//   "currentHome": "yes",
+//   "abstractForm": "yes",
+//   "registerDate": "2022-06-08T18:30:00.000Z",
+//   "conferenceStartDate": "2022-06-06T18:30:00.000Z",
+//   "conferenceEndDate": "2022-06-09T18:30:00.000Z",
+//   "image": "https://oralpath.sriher.com//resources/pcadmin/img/gallery/1103513440_WhatsApp%20Image%202021-02-25%20at%202.07.11%20PM.jpeg",
+//   "venues": "online",
+//   "conferenceType": "free",
+//   "conferenceURL": "www.zoom.dkgbj36984y.com",
+//   "scheduleConference": [],
+//   "__v": 0
+// }

@@ -7,7 +7,7 @@ export const getProject = () => async (dispatch) => {
     try {
         const project = axios({
             method: "GET",
-            url: "https://sriher.herokuapp.com/projects/"
+            url: "http://localhost:4000/projects/"
         }).then((response) => {
             return response;
         });        
@@ -24,7 +24,7 @@ export const getSpecificProject = (_id) => async (dispatch) => {
     try {
         const specificProjectList = axios({
             method: "GET",
-            url: `https://sriher.herokuapp.com/projects/get/${_id}`
+            url: `http://localhost:4000/projects/get/${_id}`
         }).then((response) => {
             return response;
         });
@@ -41,7 +41,7 @@ export const addProject = (projectData) => async (dispatch) => {
     try {
         const project = axios({
             method: "POST",
-            url: "https://sriher.herokuapp.com/projects/add-project",
+            url: "http://localhost:4000/projects/add-project",
             data: {projectData},
         }).then((response) => {
             return response;
@@ -58,7 +58,7 @@ export const updateProjectData = (projectData) => async (dispatch) => {
     try {
         const project = axios({
             method: "PUT",
-            url: "https://sriher.herokuapp.com/projects/update-project",
+            url: "http://localhost:4000/projects/update-project",
             data: {projectData},
         }).then((response) => {
             return response;
@@ -76,7 +76,7 @@ export const deleteProject = (_id) => async (dispatch) => {
     try {
         const deleteProject = axios({
             method: "DELETE",
-            url: `https://sriher.herokuapp.com/projects/delete/${_id}`,
+            url: `http://localhost:4000/projects/delete/${_id}`,
         }).then((response) => {
             return response;
         });

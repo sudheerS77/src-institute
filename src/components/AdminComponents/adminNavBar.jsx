@@ -3,7 +3,14 @@ import { FaUser } from "react-icons/fa";
 import { RiSettings5Fill } from "react-icons/ri";
 import { HiLogout } from "react-icons/hi";
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+//Redux action
+import { signOut } from "../../Redux/Reducer/Auth/auth.action";
+
 const AdminNavBar = () => {
+  const dispatch = useDispatch();
+  const signOutHandler = () => dispatch(signOut());
   return (
     <>
         <div className="w-full h-14 flex flex-row justify-between items-center w-full border-b-2 border-grey-900 text-center">
@@ -15,7 +22,10 @@ const AdminNavBar = () => {
             </div> */}
           <div className="flex items-center justify-start gap-4 text-xl py-3.5 w-full border-b border-gray-300 text-red-600 hover:bg-red-900 hover:text-gray-50 bg-red-50">
             <Link to="/admin/">
-              <button className="font-semibold  flex items-center justify-start gap-4 w-full px-4">
+              <button 
+                className="font-semibold  flex items-center justify-start gap-4 w-full px-4"
+                onClick={signOutHandler}
+              >
                 <HiLogout className="w-7 h-7"/>
                 Signout
               </button>

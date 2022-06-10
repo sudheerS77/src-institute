@@ -57,7 +57,7 @@ const App = () => {
         <Route path="/feedback/:type"  element={<SpeakerFeedback />} />
         <Route path="/:type"  element={<Master />} />
       </Routes>
-      {/* { user_role === "admin" ? ( */}
+      { user_role === "admin" ? (
         <Routes>
           <Route path="/admin" element={<AdminHomePage />}/>
           <Route path="/admin/:type" element={<AdminMaster/>} />
@@ -74,11 +74,11 @@ const App = () => {
           <Route path="/admin/feedback/:type" element={<FFUpdate urltype={"id"}/>} /> 
           <Route path="/admin/faculty-feedback/:type" element={<FFUpdate urltype={"faculty-feedback"}/>} /> 
         </Routes>
-      {/* ) : (
+      ) : (
         <></>
       )
 
-      }                     */}
+      }
     </>
   )
 }

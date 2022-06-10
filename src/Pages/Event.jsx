@@ -27,6 +27,7 @@ const Event = () => {
   useEffect(() => {
     dispatch(getEvents());
   }, []);
+  console.log(eventData);
   useEffect(() => {    
     eventData?.map((data) => {
       console.log(data);
